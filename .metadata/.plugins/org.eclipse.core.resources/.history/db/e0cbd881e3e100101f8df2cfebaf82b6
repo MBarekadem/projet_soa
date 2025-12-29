@@ -1,0 +1,104 @@
+package com.projet.service;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+import com.projet.model.User;
+
+public class ClientImpl implements User_interface {
+
+    // ✅ UNE SEULE FOIS POUR TOUTE L’APPLICATION
+    private static final EntityManagerFactory emf =Persistence.createEntityManagerFactory("soa_projet");
+
+    @Override
+    public Map<String, String> addUser(User cl) {
+        Map<String, String> result = new HashMap<>();
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            em.getTransaction().begin();
+            em.persist(cl);
+            em.getTransaction().commit();
+
+            result.put("status", "success");
+            result.put("message", "Utilisateur ajouté avec succès");
+
+        } catch (Exception e) {
+            if (em.getTransaction().isActive())
+                em.getTransaction().rollback();
+
+            result.put("status", "error");
+            result.put("message", e.getMessage());
+        } finally {
+            em.close(); // ✅ IMPORTANT
+        }
+        return result;
+    }
+
+    @Override
+    public void updateUser(User user) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.merge(user);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+    }
+
+    @Override
+    public void deleteUser(long id) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            User user = em.find(User.class, id);
+            if (user != null) {
+                em.remove(user);
+            }
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+    }
+
+    @Override
+    public User getUserById(long id) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            return em.find(User.class, id);
+        } finally {
+            em.close();
+        }
+    }
+    public List<User> searchUserByName(String nom) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            return em.createQuery(
+                    "SELECT u FROM User u WHERE u.nom LIKE :nom",
+                    User.class
+            )
+            .setParameter("nom", "%" + nom + "%")
+            .getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+
+    @Override
+    public List<User> getAllUsers() {
+        EntityManager em = emf.createEntityManager();
+        try {
+            return em.createQuery("SELECT u FROM User u", User.class)
+                     .getResultList();
+        } finally {
+            em.close();
+        }
+    }
+}

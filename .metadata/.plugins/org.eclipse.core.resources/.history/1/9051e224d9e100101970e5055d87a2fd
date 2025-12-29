@@ -1,0 +1,32 @@
+package com.projet.config;
+
+import javax.ws.rs.ApplicationPath;
+
+import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.server.ServerProperties;
+
+import com.projet.router.Rest_router;
+
+@ApplicationPath("/api") // Tous vos endpoints commenceront par /api
+public class JerseyConfig extends ResourceConfig {
+    
+    public JerseyConfig() {
+        // Enregistrer vos classes de ressources (routes)
+        register(Rest_router.class);
+        
+        // Scanner le package pour trouver d'autres ressources
+        packages("com.projet.router");
+        
+        // Activer la prise en charge JSON avec Jackson
+        register(org.glassfish.jersey.jackson.JacksonFeature.class);
+        
+        // Désactiver la validation WADL (optionnel)
+        property(ServerProperties.WADL_FEATURE_DISABLE, true);
+        
+        // Afficher les erreurs dans la réponse (utile pour le debug)
+        property(ServerProperties.BV_SEND_ERROR_IN_RESPONSE, true);
+        
+        // Autoriser les CORS si nécessaire
+        register(CorsFilter.class);
+    }
+}

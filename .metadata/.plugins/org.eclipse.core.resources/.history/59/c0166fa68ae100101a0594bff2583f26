@@ -1,0 +1,10 @@
+package com.projet.router;
+
+public class Rest_router {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

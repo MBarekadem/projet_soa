@@ -1,0 +1,7 @@
+INDEX VERSION 1.4+C:\Work\Polytec\Workspace\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+2945223312.index
+1933216879.index
+889311187.index
+4230276341.index
+2762900011.index
+1584333146.index

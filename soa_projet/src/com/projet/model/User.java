@@ -1,0 +1,99 @@
+package com.projet.model;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="personne")
+public class User {
+	public User() {}
+@Id
+@GeneratedValue(strategy=GenerationType.IDENTITY)
+private long id;
+@Column(length=8,nullable=false,unique=true)
+private String cin;
+@Column(nullable=false)
+private String nom;
+@Column(unique=true)
+private String mail;
+
+@Column(unique=true)
+private String tel;
+@Lob
+private String description;
+
+@Lob
+private String image;
+
+@Column(length=1,nullable=false)
+private String sex;
+
+
+@Column(nullable=false)
+private String adresse;
+
+
+
+
+
+public String getSex() {
+	return sex;
+}
+public void setSex(String sex) {
+	this.sex = sex;
+}
+public String getAdresse() {
+	return adresse;
+}
+public void setAdresse(String adresse) {
+	this.adresse = adresse;
+}
+public String getDescription() {
+	return description;
+}
+public void setDescription(String description) {
+	this.description = description;
+}
+
+public String getImage() {
+	return image;
+}
+public void setImage(String image) {
+	this.image = image;
+}
+public String getTel() {
+	return tel;
+}
+public void setTel(String tel) {
+	this.tel = tel;
+}
+public long getId() {
+	return id;
+}
+public void setId(long id) {
+	this.id = id;
+}
+public String getCin() {
+	return cin;
+}
+public void setCin(String cin) {
+	this.cin = cin;
+}
+public String getNom() {
+	return nom;
+}
+public void setNom(String nom) {
+	this.nom = nom;
+}
+public String getMail() {
+	return mail;
+}
+public void setMail(String mail) {
+	this.mail = mail;
+}
+
+}

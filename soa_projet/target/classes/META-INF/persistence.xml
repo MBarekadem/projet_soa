@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="soa_projet">
+        <description>Hibernate JPA Example</description>
+
+        <!-- Implémentation JPA -->
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <!-- Classes Entity -->
+        <class>com.projet.model.User</class>
+        <!-- ajoute d'autres entités ici si besoin -->
+
+        <properties>
+
+            <!-- Driver MySQL -->
+            <property name="javax.persistence.jdbc.driver"
+                      value="com.mysql.jdbc.Driver"/>
+
+            <!-- URL de la base de données -->
+            <property name="javax.persistence.jdbc.url"
+                      value="jdbc:mysql://localhost:3306/mon_projet?serverTimezone=UTC"/>
+
+            <!-- Identifiants MySQL -->
+            <property name="javax.persistence.jdbc.user" value="root"/>
+            <property name="javax.persistence.jdbc.password" value="root"/>
+
+            <!-- Hibernate -->
+            <property name="hibernate.dialect"
+                      value="org.hibernate.dialect.MySQL5Dialect"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+
+        </properties>
+
+    </persistence-unit>
+
+</persistence>

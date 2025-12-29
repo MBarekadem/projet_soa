@@ -1,0 +1,24 @@
+package com.projet.service;
+
+import java.util.List;
+import java.util.Map;
+
+import com.projet.model.User;
+
+public interface User_interface {
+	// Ajouter un utilisateur
+	public Map<String,String> addUser(User cl);
+
+    // Modifier un utilisateur
+    public void  updateUser(User user);
+
+    // Supprimer un utilisateur
+    void deleteUser(long id);
+
+    // Chercher par ID
+    User getUserById(long id);
+
+    // Lister tous les utilisateurs
+    public List<User> getAllUsers();
+    public List<User>getUserByName(String nom);
+}
